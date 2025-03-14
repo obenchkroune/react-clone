@@ -30,6 +30,7 @@ export const h = (
 const buildDomNodes = (vnode: JSX.Element) => {
   switch (typeof vnode) {
     case 'object':
+      if (!vnode) return null;
       const el = document.createElement(vnode.element);
       Object.entries(vnode.props || {}).forEach(([key, value]) => {
         if (key.startsWith('on') && typeof value === 'function') {
@@ -53,6 +54,7 @@ const buildDomNodes = (vnode: JSX.Element) => {
       });
       return el;
     case 'boolean':
+    case 'undefined':
       return null;
     default:
       return document.createTextNode(vnode.toString());

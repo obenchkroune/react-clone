@@ -201,7 +201,7 @@ declare global {
       value?: string | string[] | number;
     }
 
-    type Element = string | number | boolean | VNode;
+    type Element = string | number | boolean | null | undefined | VNode;
 
     type VNode = {
       element: string;
