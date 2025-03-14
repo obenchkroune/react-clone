@@ -1,208 +1,465 @@
-// CustomJSX.d.ts
-
-// Core HTML attributes that most elements can have
-interface CoreHTMLAttributes {
-  // Core attributes
-  id?: string;
-  className?: string;
-  style?: React.CSSProperties | string;
-  key?: string | number;
-
-  // Event handlers
-  onClick?: (event: any) => void;
-  onChange?: (event: any) => void;
-  onFocus?: (event: any) => void;
-  onBlur?: (event: any) => void;
-  onKeyDown?: (event: any) => void;
-  onKeyUp?: (event: any) => void;
-  onMouseDown?: (event: any) => void;
-  onMouseUp?: (event: any) => void;
-  onMouseEnter?: (event: any) => void;
-  onMouseLeave?: (event: any) => void;
-
-  // ARIA attributes
-  role?: string;
-  "aria-label"?: string;
-  "aria-hidden"?: boolean | "true" | "false";
-  "aria-disabled"?: boolean | "true" | "false";
-
-  // Data attributes
-  [key: `data-${string}`]: string | number | boolean | undefined;
-
-  // Any other custom attributes
-  [key: string]: any;
-}
-
-// Specific element types
-interface HTMLDivAttributes extends CoreHTMLAttributes {}
-
-interface HTMLSpanAttributes extends CoreHTMLAttributes {}
-
-interface HTMLButtonAttributes extends CoreHTMLAttributes {
-  type?: "button" | "submit" | "reset";
-  disabled?: boolean;
-  name?: string;
-  value?: string | number;
-  form?: string;
-  formAction?: string;
-  formMethod?: "post" | "get" | "dialog";
-  formNoValidate?: boolean;
-  formTarget?: string;
-}
-
-interface HTMLInputAttributes extends CoreHTMLAttributes {
-  type?:
-    | "text"
-    | "password"
-    | "checkbox"
-    | "radio"
-    | "number"
-    | "email"
-    | "tel"
-    | "url"
-    | "search"
-    | "date"
-    | "time"
-    | "datetime-local"
-    | "month"
-    | "week"
-    | "color"
-    | "file"
-    | "range"
-    | "hidden";
-  name?: string;
-  value?: string | number | readonly string[];
-  defaultValue?: string | number | readonly string[];
-  checked?: boolean;
-  defaultChecked?: boolean;
-  placeholder?: string;
-  disabled?: boolean;
-  readOnly?: boolean;
-  required?: boolean;
-  min?: number | string;
-  max?: number | string;
-  step?: number | string;
-  pattern?: string;
-  accept?: string;
-  multiple?: boolean;
-  autoComplete?: string;
-  autoFocus?: boolean;
-  size?: number;
-  list?: string;
-}
-
-interface HTMLTextAreaAttributes extends CoreHTMLAttributes {
-  name?: string;
-  value?: string;
-  defaultValue?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  readOnly?: boolean;
-  required?: boolean;
-  rows?: number;
-  cols?: number;
-  autoComplete?: string;
-  autoFocus?: boolean;
-  wrap?: "hard" | "soft" | "off";
-  maxLength?: number;
-  minLength?: number;
-}
-
-interface HTMLSelectAttributes extends CoreHTMLAttributes {
-  name?: string;
-  value?: string | number | readonly string[];
-  defaultValue?: string | number | readonly string[];
-  disabled?: boolean;
-  required?: boolean;
-  multiple?: boolean;
-  size?: number;
-  autoComplete?: string;
-  autoFocus?: boolean;
-}
-
-interface HTMLAnchorAttributes extends CoreHTMLAttributes {
-  href?: string;
-  target?: "_blank" | "_self" | "_parent" | "_top";
-  rel?: string;
-  download?: any;
-  hrefLang?: string;
-  type?: string;
-}
-
-interface HTMLImageAttributes extends CoreHTMLAttributes {
-  src?: string;
-  alt?: string;
-  width?: number | string;
-  height?: number | string;
-  loading?: "eager" | "lazy";
-  decoding?: "sync" | "async" | "auto";
-  srcSet?: string;
-  sizes?: string;
-}
-
-interface HTMLFormAttributes extends CoreHTMLAttributes {
-  action?: string;
-  method?: "post" | "get" | "dialog";
-  encType?:
-    | "application/x-www-form-urlencoded"
-    | "multipart/form-data"
-    | "text/plain";
-  target?: "_blank" | "_self" | "_parent" | "_top";
-  autoComplete?: "on" | "off";
-  noValidate?: boolean;
-
-  onSubmit: (event: Event) => void;
-}
-
-// Custom components specific to your JSX implementation
-interface CustomComponentAttributes extends CoreHTMLAttributes {
-  // Add your custom properties here
-  customProp?: string;
-  theme?: "light" | "dark" | "system";
-  variant?: string;
-}
-
-// Define SVG related attributes if you need SVG support
-interface SVGAttributes extends CoreHTMLAttributes {
-  viewBox?: string;
-  xmlns?: string;
-  fill?: string;
-  stroke?: string;
-  strokeWidth?: number | string;
-  d?: string;
-  cx?: number | string;
-  cy?: number | string;
-  r?: number | string;
-  x?: number | string;
-  y?: number | string;
-  width?: number | string;
-  height?: number | string;
-}
-
 declare global {
   namespace JSX {
-    // type FunctionComponent = (props: { [key: string]: any } | null) => VNode;
-    // type Element =
-    //   | string
-    //   | Function
-    //   | {
-    //       element: string | Function;
-    //       props: any;
-    //       key?: string | null;
-    //       children: JSX.Element[];
-    //     };
+    interface SyntheticEvent {
+      bubbles: boolean;
+      cancelable: boolean;
+      currentTarget: EventTarget;
+      defaultPrevented: boolean;
+      eventPhase: number;
+      isTrusted: boolean;
+      nativeEvent: Event;
+      preventDefault(): void;
+      stopPropagation(): void;
+      target: EventTarget;
+      timeStamp: number;
+      type: string;
+    }
 
-    type Element = string | VNode;
+    interface MouseEvent extends SyntheticEvent {
+      altKey: boolean;
+      button: number;
+      buttons: number;
+      clientX: number;
+      clientY: number;
+      ctrlKey: boolean;
+      metaKey: boolean;
+      movementX: number;
+      movementY: number;
+      pageX: number;
+      pageY: number;
+      screenX: number;
+      screenY: number;
+      shiftKey: boolean;
+    }
 
-    type VNode =
-      | {
-          element: string;
-          props: { [key: string]: any };
-          children: (VNode | string)[];
-        }
-      | string
-      | number
-      | boolean;
+    interface KeyboardEvent extends SyntheticEvent {
+      altKey: boolean;
+      charCode: number;
+      code: string;
+      ctrlKey: boolean;
+      isComposing: boolean;
+      key: string;
+      keyCode: number;
+      locale: string;
+      location: number;
+      metaKey: boolean;
+      repeat: boolean;
+      shiftKey: boolean;
+      which: number;
+    }
+
+    interface ChangeEvent extends SyntheticEvent {
+      target: EventTarget & {
+        value: string;
+        checked?: boolean;
+      };
+    }
+
+    interface FocusEvent extends SyntheticEvent {
+      relatedTarget: EventTarget | null;
+    }
+
+    interface HTMLAttributes {
+      id?: string;
+      className?: string;
+      style?: string | Partial<CSSStyleDeclaration>;
+
+      onClick?: (event: MouseEvent) => void;
+      onContextMenu?: (event: MouseEvent) => void;
+      onDoubleClick?: (event: MouseEvent) => void;
+      onDrag?: (event: MouseEvent) => void;
+      onDragEnd?: (event: MouseEvent) => void;
+      onDragEnter?: (event: MouseEvent) => void;
+      onDragExit?: (event: MouseEvent) => void;
+      onDragLeave?: (event: MouseEvent) => void;
+      onDragOver?: (event: MouseEvent) => void;
+      onDragStart?: (event: MouseEvent) => void;
+      onDrop?: (event: MouseEvent) => void;
+      onMouseDown?: (event: MouseEvent) => void;
+      onMouseEnter?: (event: MouseEvent) => void;
+      onMouseLeave?: (event: MouseEvent) => void;
+      onMouseMove?: (event: MouseEvent) => void;
+      onMouseOut?: (event: MouseEvent) => void;
+      onMouseOver?: (event: MouseEvent) => void;
+      onMouseUp?: (event: MouseEvent) => void;
+
+      onKeyDown?: (event: KeyboardEvent) => void;
+      onKeyPress?: (event: KeyboardEvent) => void;
+      onKeyUp?: (event: KeyboardEvent) => void;
+
+      onFocus?: (event: FocusEvent) => void;
+      onBlur?: (event: FocusEvent) => void;
+
+      onChange?: (event: ChangeEvent) => void;
+      onInput?: (event: ChangeEvent) => void;
+      onSubmit?: (event: SyntheticEvent) => void;
+      onReset?: (event: SyntheticEvent) => void;
+
+      onLoad?: (event: SyntheticEvent) => void;
+      onError?: (event: SyntheticEvent) => void;
+      onScroll?: (event: SyntheticEvent) => void;
+
+      role?: string;
+      tabIndex?: number;
+      hidden?: boolean;
+      title?: string;
+      lang?: string;
+      dir?: "ltr" | "rtl" | "auto";
+      draggable?: boolean;
+      accessKey?: string;
+      contentEditable?: boolean | "true" | "false";
+      spellCheck?: boolean | "true" | "false";
+      translate?: "yes" | "no";
+
+      dangerouslySetInnerHTML?: { __html: string };
+
+      [dataAttr: `data-${string}`]: string | number | boolean;
+      children?: Element[] | Element;
+      key?: string;
+    }
+
+    interface InputHTMLAttributes extends HTMLAttributes {
+      accept?: string;
+      alt?: string;
+      autoComplete?: string;
+      autoFocus?: boolean;
+      capture?: string;
+      checked?: boolean;
+      disabled?: boolean;
+      form?: string;
+      formAction?: string;
+      formEncType?: string;
+      formMethod?: string;
+      formNoValidate?: boolean;
+      formTarget?: string;
+      height?: number | string;
+      list?: string;
+      max?: number | string;
+      maxLength?: number;
+      min?: number | string;
+      minLength?: number;
+      multiple?: boolean;
+      name?: string;
+      pattern?: string;
+      placeholder?: string;
+      readOnly?: boolean;
+      required?: boolean;
+      size?: number;
+      src?: string;
+      step?: number | string;
+      type?: string;
+      value?: string | number | readonly string[];
+      width?: number | string;
+    }
+
+    interface FormHTMLAttributes extends HTMLAttributes {
+      acceptCharset?: string;
+      action?: string;
+      autoComplete?: string;
+      encType?: string;
+      method?: string;
+      name?: string;
+      noValidate?: boolean;
+      target?: string;
+    }
+
+    interface AnchorHTMLAttributes extends HTMLAttributes {
+      download?: string;
+      href?: string;
+      hrefLang?: string;
+      media?: string;
+      rel?: string;
+      target?: string;
+      type?: string;
+    }
+
+    interface ImgHTMLAttributes extends HTMLAttributes {
+      alt?: string;
+      crossOrigin?: "anonymous" | "use-credentials" | "";
+      decoding?: "async" | "auto" | "sync";
+      height?: number | string;
+      loading?: "eager" | "lazy";
+      referrerPolicy?: string;
+      sizes?: string;
+      src?: string;
+      srcSet?: string;
+      useMap?: string;
+      width?: number | string;
+    }
+
+    interface ButtonHTMLAttributes extends HTMLAttributes {
+      autoFocus?: boolean;
+      disabled?: boolean;
+      form?: string;
+      formAction?: string;
+      formEncType?: string;
+      formMethod?: string;
+      formNoValidate?: boolean;
+      formTarget?: string;
+      name?: string;
+      type?: "submit" | "reset" | "button";
+      value?: string | string[] | number;
+    }
+
+    type Element = string | number | boolean | VNode;
+
+    type VNode = {
+      element: string;
+      props: { [key: string]: any };
+      children: Element[];
+    };
+
+    interface IntrinsicElements {
+      html: HTMLAttributes;
+
+      head: HTMLAttributes;
+      title: HTMLAttributes;
+      base: HTMLAttributes & { href?: string; target?: string };
+      link: HTMLAttributes & {
+        href?: string;
+        rel?: string;
+        media?: string;
+        type?: string;
+      };
+      meta: HTMLAttributes & {
+        content?: string;
+        name?: string;
+        httpEquiv?: string;
+        charset?: string;
+      };
+      style: HTMLAttributes;
+
+      body: HTMLAttributes;
+      article: HTMLAttributes;
+      section: HTMLAttributes;
+      nav: HTMLAttributes;
+      aside: HTMLAttributes;
+      h1: HTMLAttributes;
+      h2: HTMLAttributes;
+      h3: HTMLAttributes;
+      h4: HTMLAttributes;
+      h5: HTMLAttributes;
+      h6: HTMLAttributes;
+      header: HTMLAttributes;
+      footer: HTMLAttributes;
+      address: HTMLAttributes;
+      main: HTMLAttributes;
+
+      p: HTMLAttributes;
+      hr: HTMLAttributes;
+      pre: HTMLAttributes;
+      blockquote: HTMLAttributes & { cite?: string };
+      ol: HTMLAttributes & {
+        reversed?: boolean;
+        start?: number;
+        type?: string;
+      };
+      ul: HTMLAttributes;
+      li: HTMLAttributes & { value?: number };
+      dl: HTMLAttributes;
+      dt: HTMLAttributes;
+      dd: HTMLAttributes;
+      figure: HTMLAttributes;
+      figcaption: HTMLAttributes;
+      div: HTMLAttributes;
+
+      a: AnchorHTMLAttributes;
+      em: HTMLAttributes;
+      strong: HTMLAttributes;
+      small: HTMLAttributes;
+      s: HTMLAttributes;
+      cite: HTMLAttributes;
+      q: HTMLAttributes & { cite?: string };
+      dfn: HTMLAttributes;
+      abbr: HTMLAttributes & { title?: string };
+      data: HTMLAttributes & { value?: string };
+      time: HTMLAttributes & { dateTime?: string };
+      code: HTMLAttributes;
+      var: HTMLAttributes;
+      samp: HTMLAttributes;
+      kbd: HTMLAttributes;
+      sub: HTMLAttributes;
+      sup: HTMLAttributes;
+      i: HTMLAttributes;
+      b: HTMLAttributes;
+      u: HTMLAttributes;
+      mark: HTMLAttributes;
+      ruby: HTMLAttributes;
+      rt: HTMLAttributes;
+      rp: HTMLAttributes;
+      bdi: HTMLAttributes;
+      bdo: HTMLAttributes & { dir?: string };
+      span: HTMLAttributes;
+      br: HTMLAttributes;
+      wbr: HTMLAttributes;
+
+      img: ImgHTMLAttributes;
+      audio: HTMLAttributes & {
+        autoPlay?: boolean;
+        controls?: boolean;
+        loop?: boolean;
+        muted?: boolean;
+        preload?: "none" | "metadata" | "auto";
+        src?: string;
+      };
+      video: HTMLAttributes & {
+        autoPlay?: boolean;
+        controls?: boolean;
+        height?: number | string;
+        loop?: boolean;
+        muted?: boolean;
+        poster?: string;
+        preload?: "none" | "metadata" | "auto";
+        src?: string;
+        width?: number | string;
+      };
+      track: HTMLAttributes & {
+        default?: boolean;
+        kind?:
+          | "subtitles"
+          | "captions"
+          | "descriptions"
+          | "chapters"
+          | "metadata";
+        label?: string;
+        src?: string;
+        srcLang?: string;
+      };
+
+      iframe: HTMLAttributes & {
+        allow?: string;
+        allowFullScreen?: boolean;
+        height?: number | string;
+        loading?: "eager" | "lazy";
+        name?: string;
+        referrerPolicy?: string;
+        sandbox?: string;
+        src?: string;
+        srcDoc?: string;
+        width?: number | string;
+      };
+      embed: HTMLAttributes & {
+        height?: number | string;
+        src?: string;
+        type?: string;
+        width?: number | string;
+      };
+      object: HTMLAttributes & {
+        data?: string;
+        form?: string;
+        height?: number | string;
+        name?: string;
+        type?: string;
+        useMap?: string;
+        width?: number | string;
+      };
+      param: HTMLAttributes & { name?: string; value?: string };
+
+      svg: HTMLAttributes;
+      math: HTMLAttributes;
+
+      script: HTMLAttributes & {
+        async?: boolean;
+        crossOrigin?: string;
+        defer?: boolean;
+        integrity?: string;
+        noModule?: boolean;
+        referrerPolicy?: string;
+        src?: string;
+        type?: string;
+      };
+      noscript: HTMLAttributes;
+
+      del: HTMLAttributes & { cite?: string; dateTime?: string };
+      ins: HTMLAttributes & { cite?: string; dateTime?: string };
+
+      table: HTMLAttributes;
+      caption: HTMLAttributes;
+      colgroup: HTMLAttributes & { span?: number };
+      col: HTMLAttributes & { span?: number };
+      tbody: HTMLAttributes;
+      thead: HTMLAttributes;
+      tfoot: HTMLAttributes;
+      tr: HTMLAttributes;
+      td: HTMLAttributes & {
+        colSpan?: number;
+        headers?: string;
+        rowSpan?: number;
+      };
+      th: HTMLAttributes & {
+        abbr?: string;
+        colSpan?: number;
+        headers?: string;
+        rowSpan?: number;
+        scope?: "row" | "col" | "rowgroup" | "colgroup";
+      };
+
+      form: FormHTMLAttributes;
+      label: HTMLAttributes & { form?: string; htmlFor?: string };
+      input: InputHTMLAttributes;
+      button: ButtonHTMLAttributes;
+      select: HTMLAttributes & {
+        autoComplete?: string;
+        autoFocus?: boolean;
+        disabled?: boolean;
+        form?: string;
+        multiple?: boolean;
+        name?: string;
+        required?: boolean;
+        size?: number;
+        value?: string | string[] | number;
+      };
+      datalist: HTMLAttributes;
+      optgroup: HTMLAttributes & { disabled?: boolean; label?: string };
+      option: HTMLAttributes & {
+        disabled?: boolean;
+        label?: string;
+        selected?: boolean;
+        value?: string | string[] | number;
+      };
+      textarea: HTMLAttributes & {
+        autoComplete?: string;
+        autoFocus?: boolean;
+        cols?: number;
+        disabled?: boolean;
+        form?: string;
+        maxLength?: number;
+        minLength?: number;
+        name?: string;
+        placeholder?: string;
+        readOnly?: boolean;
+        required?: boolean;
+        rows?: number;
+        value?: string;
+        wrap?: "hard" | "soft";
+      };
+      fieldset: HTMLAttributes & {
+        disabled?: boolean;
+        form?: string;
+        name?: string;
+      };
+      legend: HTMLAttributes;
+      progress: HTMLAttributes & {
+        max?: number | string;
+        value?: number | string;
+      };
+      meter: HTMLAttributes & {
+        form?: string;
+        high?: number;
+        low?: number;
+        max?: number | string;
+        min?: number | string;
+        optimum?: number;
+        value?: number | string;
+      };
+
+      details: HTMLAttributes & { open?: boolean };
+      summary: HTMLAttributes;
+      dialog: HTMLAttributes & { open?: boolean };
+
+      slot: HTMLAttributes & { name?: string };
+      template: HTMLAttributes;
+    }
 
     interface ElementAttributesProperty {
       props: {};
@@ -212,57 +469,12 @@ declare global {
       children: {};
     }
 
-    interface IntrinsicElements {
-      // HTML elements
-      div: HTMLDivAttributes;
-      span: HTMLSpanAttributes;
-      p: CoreHTMLAttributes;
-      h1: CoreHTMLAttributes;
-      h2: CoreHTMLAttributes;
-      h3: CoreHTMLAttributes;
-      h4: CoreHTMLAttributes;
-      h5: CoreHTMLAttributes;
-      h6: CoreHTMLAttributes;
-      button: HTMLButtonAttributes;
-      input: HTMLInputAttributes;
-      textarea: HTMLTextAreaAttributes;
-      select: HTMLSelectAttributes;
-      option: CoreHTMLAttributes & {
-        value?: string | number;
-        selected?: boolean;
-        disabled?: boolean;
-      };
-      a: HTMLAnchorAttributes;
-      img: HTMLImageAttributes;
-      form: HTMLFormAttributes;
-      label: CoreHTMLAttributes & { htmlFor?: string };
-      ul: CoreHTMLAttributes;
-      ol: CoreHTMLAttributes;
-      li: CoreHTMLAttributes;
-      table: CoreHTMLAttributes;
-      tr: CoreHTMLAttributes;
-      td: CoreHTMLAttributes & { colSpan?: number; rowSpan?: number };
-      th: CoreHTMLAttributes & {
-        colSpan?: number;
-        rowSpan?: number;
-        scope?: "col" | "row" | "rowgroup" | "colgroup";
-      };
-      thead: CoreHTMLAttributes;
-      tbody: CoreHTMLAttributes;
-      tfoot: CoreHTMLAttributes;
+    interface IntrinsicAttributes {
+      key?: string | number;
+    }
 
-      // SVG elements
-      svg: SVGAttributes;
-      path: SVGAttributes;
-      circle: SVGAttributes;
-      rect: SVGAttributes;
-      line: SVGAttributes;
-
-      // Add your custom components
-      customComponent: CustomComponentAttributes;
-
-      // Allow any other HTML element
-      [elemName: string]: any;
+    interface IntrinsicClassAttributes<T> {
+      ref?: T;
     }
   }
 }

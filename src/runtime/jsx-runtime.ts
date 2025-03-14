@@ -1,8 +1,10 @@
 export const h = (
-  element: JSX.Element | ((props?: { [key: string]: any } | null) => JSX.VNode),
+  element:
+    | JSX.Element
+    | ((props?: { [key: string]: any } | null) => JSX.Element),
   props: { [key: string]: any } | null,
   ...children: JSX.VNode[]
-): JSX.VNode => {
+): JSX.Element => {
   switch (typeof element) {
     case "function":
       return element(props);
@@ -17,7 +19,7 @@ export const h = (
   }
 };
 
-const buildDomNodes = (vnode: JSX.VNode) => {
+const buildDomNodes = (vnode: JSX.Element) => {
   switch (typeof vnode) {
     case "object":
       const el = document.createElement(vnode.element);

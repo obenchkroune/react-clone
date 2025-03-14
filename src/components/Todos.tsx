@@ -7,7 +7,7 @@ export const Todos = () => {
     },
   ];
 
-  const handleSubmit = (e: Event) => {
+  const handleSubmit = (e: JSX.SyntheticEvent) => {
     e.preventDefault();
     console.log("form submitted");
   };
