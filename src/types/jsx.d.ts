@@ -104,12 +104,12 @@ declare global {
       hidden?: boolean;
       title?: string;
       lang?: string;
-      dir?: "ltr" | "rtl" | "auto";
+      dir?: 'ltr' | 'rtl' | 'auto';
       draggable?: boolean;
       accessKey?: string;
-      contentEditable?: boolean | "true" | "false";
-      spellCheck?: boolean | "true" | "false";
-      translate?: "yes" | "no";
+      contentEditable?: boolean | 'true' | 'false';
+      spellCheck?: boolean | 'true' | 'false';
+      translate?: 'yes' | 'no';
 
       dangerouslySetInnerHTML?: { __html: string };
 
@@ -175,10 +175,10 @@ declare global {
 
     interface ImgHTMLAttributes extends HTMLAttributes {
       alt?: string;
-      crossOrigin?: "anonymous" | "use-credentials" | "";
-      decoding?: "async" | "auto" | "sync";
+      crossOrigin?: 'anonymous' | 'use-credentials' | '';
+      decoding?: 'async' | 'auto' | 'sync';
       height?: number | string;
-      loading?: "eager" | "lazy";
+      loading?: 'eager' | 'lazy';
       referrerPolicy?: string;
       sizes?: string;
       src?: string;
@@ -197,7 +197,7 @@ declare global {
       formNoValidate?: boolean;
       formTarget?: string;
       name?: string;
-      type?: "submit" | "reset" | "button";
+      type?: 'submit' | 'reset' | 'button';
       value?: string | string[] | number;
     }
 
@@ -207,6 +207,7 @@ declare global {
       element: string;
       props: { [key: string]: any };
       children: Element[];
+      key?: string;
     };
 
     interface IntrinsicElements {
@@ -299,7 +300,7 @@ declare global {
         controls?: boolean;
         loop?: boolean;
         muted?: boolean;
-        preload?: "none" | "metadata" | "auto";
+        preload?: 'none' | 'metadata' | 'auto';
         src?: string;
       };
       video: HTMLAttributes & {
@@ -309,18 +310,18 @@ declare global {
         loop?: boolean;
         muted?: boolean;
         poster?: string;
-        preload?: "none" | "metadata" | "auto";
+        preload?: 'none' | 'metadata' | 'auto';
         src?: string;
         width?: number | string;
       };
       track: HTMLAttributes & {
         default?: boolean;
         kind?:
-          | "subtitles"
-          | "captions"
-          | "descriptions"
-          | "chapters"
-          | "metadata";
+          | 'subtitles'
+          | 'captions'
+          | 'descriptions'
+          | 'chapters'
+          | 'metadata';
         label?: string;
         src?: string;
         srcLang?: string;
@@ -330,7 +331,7 @@ declare global {
         allow?: string;
         allowFullScreen?: boolean;
         height?: number | string;
-        loading?: "eager" | "lazy";
+        loading?: 'eager' | 'lazy';
         name?: string;
         referrerPolicy?: string;
         sandbox?: string;
@@ -391,7 +392,7 @@ declare global {
         colSpan?: number;
         headers?: string;
         rowSpan?: number;
-        scope?: "row" | "col" | "rowgroup" | "colgroup";
+        scope?: 'row' | 'col' | 'rowgroup' | 'colgroup';
       };
 
       form: FormHTMLAttributes;
@@ -431,7 +432,7 @@ declare global {
         required?: boolean;
         rows?: number;
         value?: string;
-        wrap?: "hard" | "soft";
+        wrap?: 'hard' | 'soft';
       };
       fieldset: HTMLAttributes & {
         disabled?: boolean;

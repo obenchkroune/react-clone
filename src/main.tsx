@@ -1,5 +1,5 @@
-import { render } from "~/runtime/jsx-runtime";
-import { Todos } from "./components/Todos";
+import { render } from '~/runtime/jsx-runtime';
+import { Todos } from './components/Todos';
 
 const App = () => {
   return (
@@ -10,6 +10,6 @@ const App = () => {
   );
 };
 
-const root = document.getElementById("app") as HTMLDivElement;
+const root = document.getElementById('app') as HTMLDivElement;
 
 render(root, <App />);

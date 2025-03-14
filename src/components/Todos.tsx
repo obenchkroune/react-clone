@@ -1,21 +1,21 @@
 export const Todos = () => {
   const todos: Todo[] = [
     {
-      id: "1",
-      content: "Todo 1",
+      id: '1',
+      content: 'Todo 1',
       completed: false,
     },
   ];
 
   const handleSubmit = (e: JSX.SyntheticEvent) => {
     e.preventDefault();
-    console.log("form submitted");
+    console.log('form submitted');
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="text" />
+        <input type='text' />
         <button>save</button>
       </form>
       <ul>
